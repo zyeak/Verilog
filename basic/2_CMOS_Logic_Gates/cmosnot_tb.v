@@ -4,7 +4,7 @@ module cmosnot_tb;
 	reg a;
 	wire f;
 
-	cmosnot cmosnot_not (f, a);
+	cmosnot cmos_not (f, a);
 	
 	initial
 	begin
