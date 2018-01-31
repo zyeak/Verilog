@@ -1,0 +1,111 @@
+#! /usr/bin/vvp
+:ivl_version "10.1 (stable)";
+:ivl_delay_selection "TYPICAL";
+:vpi_time_precision - 9;
+:vpi_module "system";
+:vpi_module "vhdl_sys";
+:vpi_module "v2005_math";
+:vpi_module "va_math";
+S_0x5556d24eebf0 .scope module, "shift_tb" "shift_tb" 2 3;
+ .timescale -9 -9;
+v0x5556d254e2d0_0 .var "arith", 0 0;
+v0x5556d254e390_0 .var "data", 31 0;
+v0x5556d254e460_0 .net "result", 31 0, v0x5556d254df50_0;  1 drivers
+v0x5556d254e560_0 .var "right", 0 0;
+v0x5556d254e630_0 .var "s", 4 0;
+S_0x5556d24eed70 .scope module, "shift" "shift" 2 11, 3 2 0, S_0x5556d24eebf0;
+ .timescale -9 -9;
+    .port_info 0 /INPUT 32 "data"
+    .port_info 1 /INPUT 5 "shift"
+    .port_info 2 /INPUT 1 "right"
+    .port_info 3 /INPUT 1 "arith"
+    .port_info 4 /OUTPUT 32 "result"
+v0x5556d2527440_0 .net "arith", 0 0, v0x5556d254e2d0_0;  1 drivers
+v0x5556d254de70_0 .net "data", 31 0, v0x5556d254e390_0;  1 drivers
+v0x5556d254df50_0 .var "result", 31 0;
+v0x5556d254e040_0 .net "right", 0 0, v0x5556d254e560_0;  1 drivers
+v0x5556d254e100_0 .net "shift", 4 0, v0x5556d254e630_0;  1 drivers
+E_0x5556d24ef8a0 .event edge, v0x5556d254e040_0, v0x5556d254de70_0, v0x5556d254e100_0, v0x5556d2527440_0;
+    .scope S_0x5556d24eed70;
+T_0 ;
+    %wait E_0x5556d24ef8a0;
+    %load/vec4 v0x5556d254e040_0;
+    %nor/r;
+    %flag_set/vec4 8;
+    %jmp/0xz  T_0.0, 8;
+    %load/vec4 v0x5556d254de70_0;
+    %ix/getv 4, v0x5556d254e100_0;
+    %shiftl 4;
+    %store/vec4 v0x5556d254df50_0, 0, 32;
+    %jmp T_0.1;
+T_0.0 ;
+    %load/vec4 v0x5556d2527440_0;
+    %nor/r;
+    %flag_set/vec4 8;
+    %jmp/0xz  T_0.2, 8;
+    %load/vec4 v0x5556d254de70_0;
+    %ix/getv 4, v0x5556d254e100_0;
+    %shiftr 4;
+    %store/vec4 v0x5556d254df50_0, 0, 32;
+    %jmp T_0.3;
+T_0.2 ;
+    %load/vec4 v0x5556d254de70_0;
+    %ix/getv 4, v0x5556d254e100_0;
+    %shiftr/s 4;
+    %store/vec4 v0x5556d254df50_0, 0, 32;
+T_0.3 ;
+T_0.1 ;
+    %jmp T_0;
+    .thread T_0, $push;
+    .scope S_0x5556d24eebf0;
+T_1 ;
+    %pushi/vec4 0, 0, 1;
+    %store/vec4 v0x5556d254e560_0, 0, 1;
+    %pushi/vec4 0, 0, 1;
+    %store/vec4 v0x5556d254e2d0_0, 0, 1;
+    %pushi/vec4 4278190335, 0, 32;
+    %store/vec4 v0x5556d254e390_0, 0, 32;
+    %pushi/vec4 8, 0, 5;
+    %store/vec4 v0x5556d254e630_0, 0, 5;
+    %delay 1, 0;
+    %pushi/vec4 1, 0, 1;
+    %store/vec4 v0x5556d254e560_0, 0, 1;
+    %pushi/vec4 0, 0, 1;
+    %store/vec4 v0x5556d254e2d0_0, 0, 1;
+    %pushi/vec4 4278190335, 0, 32;
+    %store/vec4 v0x5556d254e390_0, 0, 32;
+    %pushi/vec4 8, 0, 5;
+    %store/vec4 v0x5556d254e630_0, 0, 5;
+    %delay 1, 0;
+    %pushi/vec4 1, 0, 1;
+    %store/vec4 v0x5556d254e560_0, 0, 1;
+    %pushi/vec4 1, 0, 1;
+    %store/vec4 v0x5556d254e2d0_0, 0, 1;
+    %pushi/vec4 4278190335, 0, 32;
+    %store/vec4 v0x5556d254e390_0, 0, 32;
+    %pushi/vec4 8, 0, 5;
+    %store/vec4 v0x5556d254e630_0, 0, 5;
+    %delay 1, 0;
+    %pushi/vec4 0, 0, 1;
+    %store/vec4 v0x5556d254e560_0, 0, 1;
+    %pushi/vec4 0, 0, 1;
+    %store/vec4 v0x5556d254e2d0_0, 0, 1;
+    %pushi/vec4 4278190335, 0, 32;
+    %store/vec4 v0x5556d254e390_0, 0, 32;
+    %pushi/vec4 0, 0, 5;
+    %store/vec4 v0x5556d254e630_0, 0, 5;
+    %delay 1, 0;
+    %vpi_call 2 18 "$finish" {0 0 0};
+    %end;
+    .thread T_1;
+    .scope S_0x5556d24eebf0;
+T_2 ;
+    %vpi_call 2 22 "$monitor", "%2d:\011right=%b\011arith=%b\011data=%h\011s=%b\011result=%h", $time, v0x5556d254e560_0, v0x5556d254e2d0_0, v0x5556d254e390_0, v0x5556d254e630_0, v0x5556d254e460_0 {0 0 0};
+    %end;
+    .thread T_2;
+# The file index is used to find the file name in the following table.
+:file_names 4;
+    "N/A";
+    "<interactive>";
+    "shift_tb.v";
+    "shift.v";
