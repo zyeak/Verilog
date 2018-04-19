@@ -1,0 +1,69 @@
+#! /usr/bin/vvp
+:ivl_version "10.1 (stable)";
+:ivl_delay_selection "TYPICAL";
+:vpi_time_precision - 9;
+:vpi_module "system";
+:vpi_module "vhdl_sys";
+:vpi_module "v2005_math";
+:vpi_module "va_math";
+S_0x560e70e58b50 .scope module, "man_encoder_tb" "man_encoder_tb" 2 3;
+ .timescale -9 -9;
+v0x560e70eb3590_0 .var "clk", 0 0;
+v0x560e70eb3660_0 .var "data", 0 0;
+v0x560e70eb3730_0 .net "out", 0 0, L_0x560e70eb3830;  1 drivers
+S_0x560e70e58cd0 .scope module, "encoder" "man_encoder" 2 8, 3 2 0, S_0x560e70e58b50;
+ .timescale -9 -9;
+    .port_info 0 /INPUT 1 "clk"
+    .port_info 1 /INPUT 1 "data"
+    .port_info 2 /OUTPUT 1 "out"
+L_0x560e70eb3830 .functor XOR 1, v0x560e70eb3590_0, v0x560e70eb3660_0, C4<0>, C4<0>;
+v0x560e70e8fff0_0 .net "clk", 0 0, v0x560e70eb3590_0;  1 drivers
+v0x560e70eb3380_0 .net "data", 0 0, v0x560e70eb3660_0;  1 drivers
+v0x560e70eb3440_0 .net "out", 0 0, L_0x560e70eb3830;  alias, 1 drivers
+    .scope S_0x560e70e58b50;
+T_0 ;
+    %delay 0, 0;
+    %pushi/vec4 0, 0, 1;
+    %store/vec4 v0x560e70eb3660_0, 0, 1;
+    %pushi/vec4 0, 0, 1;
+    %store/vec4 v0x560e70eb3590_0, 0, 1;
+    %delay 1, 0;
+    %pushi/vec4 0, 0, 1;
+    %store/vec4 v0x560e70eb3660_0, 0, 1;
+    %delay 1, 0;
+    %pushi/vec4 1, 0, 1;
+    %store/vec4 v0x560e70eb3660_0, 0, 1;
+    %delay 4, 0;
+    %pushi/vec4 0, 0, 1;
+    %store/vec4 v0x560e70eb3660_0, 0, 1;
+    %delay 4, 0;
+    %pushi/vec4 1, 0, 1;
+    %store/vec4 v0x560e70eb3660_0, 0, 1;
+    %delay 2, 0;
+    %pushi/vec4 0, 0, 1;
+    %store/vec4 v0x560e70eb3660_0, 0, 1;
+    %delay 1, 0;
+    %vpi_call 2 18 "$finish" {0 0 0};
+    %end;
+    .thread T_0;
+    .scope S_0x560e70e58b50;
+T_1 ;
+    %vpi_call 2 22 "$monitor", "%2d: %b\011 %b\011 %b\011", $time, v0x560e70eb3590_0, v0x560e70eb3660_0, v0x560e70eb3730_0 {0 0 0};
+    %vpi_call 2 23 "$dumpfile", "encoder.vcd" {0 0 0};
+    %vpi_call 2 24 "$dumpvars" {0 0 0};
+    %end;
+    .thread T_1;
+    .scope S_0x560e70e58b50;
+T_2 ;
+    %delay 1, 0;
+    %load/vec4 v0x560e70eb3590_0;
+    %nor/r;
+    %store/vec4 v0x560e70eb3590_0, 0, 1;
+    %jmp T_2;
+    .thread T_2;
+# The file index is used to find the file name in the following table.
+:file_names 4;
+    "N/A";
+    "<interactive>";
+    "man_encoder_tb.v";
+    "man_encoder.v";
